@@ -10,12 +10,13 @@ public class SelfReference {
         serialize( "cyclic.txt", cyclicGraph );
         GraphNode deserialize = ( GraphNode ) deserialize( "cyclic.txt" );
 
+        System.out.println( cyclicGraph == cyclicGraph.nextNode );
         System.out.println( deserialize == deserialize.nextNode );
-
+        System.out.println( cyclicGraph == deserialize );
     }
 
     private static Object deserialize( String fileName ) throws IOException, ClassNotFoundException {
-        try ( FileInputStream fis = new FileInputStream( "test.txt" );
+        try ( FileInputStream fis = new FileInputStream( fileName );
               ObjectInputStream in = new ObjectInputStream( fis ) ) {
             return in.readObject();
         }
